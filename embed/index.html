@@ -18,16 +18,20 @@
         var prefix=name+"=";
         return document.cookie.split(";").map(function(v){return v.trim();}).filter(function(v){return v.indexOf(prefix)===0;}).map(function(v){return decodeURIComponent(v.slice(prefix.length));})[0]||"";
       }
-      function clearShareCookie(){
+      function clearShareState(){
+        try { sessionStorage.removeItem("daRoomShare"); } catch(e) {}
+        document.cookie="daRoomShare=; Max-Age=0; Path=/; Secure; SameSite=Lax";
         document.cookie="daRoomShare=; Max-Age=0; Domain=danandalice.co.uk; Path=/; Secure; SameSite=Lax";
       }
-      var token=(getCookie("daRoomShare")||"").toUpperCase();
+      var stored="";
+      try { stored=sessionStorage.getItem("daRoomShare")||""; } catch(e) {}
+      var token=(stored||getCookie("daRoomShare")||"").toUpperCase();
       if(!/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{8}$/.test(token)) token="";
       var src="https://script.google.com/macros/s/AKfycbyP5aMvPN0CKMdxesFovK7GuLSwy-pRDTVFCXi9fmdbS8hmX29DVxYhi8PQamqDa8R8/exec?view=ACCOMMODATION";
       if(token) src+="&share="+encodeURIComponent(token);
       document.getElementById("portal").src=src;
       window.addEventListener("message",function(event){
-        if(event&&event.data&&event.data.type==="DA_ROOM_SHARE_CONSUMED") clearShareCookie();
+        if(event&&event.data&&event.data.type==="DA_ROOM_SHARE_CONSUMED") clearShareState();
       });
     })();
   </script>
