@@ -12,7 +12,8 @@
       if(!path){window.location.replace(accommodation);return;}
       var token=path.toUpperCase();
       if(!/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{8}$/.test(token)){window.location.replace(accommodation);return;}
-      document.cookie="daRoomShare="+encodeURIComponent(token)+"; Max-Age=3600; Domain=danandalice.co.uk; Path=/; Secure; SameSite=Lax";
+      try { sessionStorage.setItem("daRoomShare", token); } catch(e) {}
+      document.cookie="daRoomShare="+encodeURIComponent(token)+"; Max-Age=3600; Path=/; Secure; SameSite=Lax";
       window.location.replace(accommodation);
     })();
   </script>
