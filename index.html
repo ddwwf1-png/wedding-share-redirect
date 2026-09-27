@@ -6,20 +6,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dan & Alice — Room Share</title>
   <script>
-    (function () {
-      var accommodation = "https://www.danandalice.co.uk/Accommodation";
-      var path = (window.location.pathname || "/").replace(/^\/+|\/+$/g, "");
-      if (!path) {
-        window.location.replace(accommodation);
-        return;
-      }
-      var token = path.toUpperCase();
-      if (!/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{8}$/.test(token)) {
-        window.location.replace(accommodation);
-        return;
-      }
-      var target = "https://script.google.com/macros/s/AKfycbyP5aMvPN0CKMdxesFovK7GuLSwy-pRDTVFCXi9fmdbS8hmX29DVxYhi8PQamqDa8R8/exec?view=ACCOMMODATION&share=" + encodeURIComponent(token);
-      window.location.replace(target);
+    (function(){
+      var accommodation="https://www.danandalice.co.uk/Accommodation";
+      var path=(window.location.pathname||"/").replace(/^\/+|\/+$/g,"");
+      if(!path){window.location.replace(accommodation);return;}
+      var token=path.toUpperCase();
+      if(!/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{8}$/.test(token)){window.location.replace(accommodation);return;}
+      document.cookie="daRoomShare="+encodeURIComponent(token)+"; Max-Age=3600; Domain=danandalice.co.uk; Path=/; Secure; SameSite=Lax";
+      window.location.replace(accommodation);
     })();
   </script>
 </head>
