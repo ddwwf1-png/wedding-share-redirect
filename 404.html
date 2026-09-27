@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dan & Alice — Room Share</title>
+  <script>
+    (function () {
+      var accommodation = "https://www.danandalice.co.uk/Accommodation";
+      var path = (window.location.pathname || "/").replace(/^\/+|\/+$/g, "");
+      var token = path.toUpperCase();
+      if (!/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{8}$/.test(token)) {
+        window.location.replace(accommodation);
+        return;
+      }
+      var target = "https://script.google.com/macros/s/AKfycbyP5aMvPN0CKMdxesFovK7GuLSwy-pRDTVFCXi9fmdbS8hmX29DVxYhi8PQamqDa8R8/exec?view=ACCOMMODATION&share=" + encodeURIComponent(token);
+      window.location.replace(target);
+    })();
+  </script>
+</head>
+<body>
+  <p>Taking you to Dan & Alice's accommodation page…</p>
+</body>
+</html>
