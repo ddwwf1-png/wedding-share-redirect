@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wedding accommodation</title>
+  <style>
+    html,body{margin:0;padding:0;width:100%;min-height:100%;background:#fff}
+    iframe{display:block;width:100%;height:2400px;border:0;background:#fff}
+  </style>
+</head>
+<body>
+  <iframe id="portal" title="Wedding accommodation" allow="clipboard-write"></iframe>
+  <script>
+    (function(){
+      function getCookie(name){
+        var prefix=name+"=";
+        return document.cookie.split(";").map(function(v){return v.trim();}).filter(function(v){return v.indexOf(prefix)===0;}).map(function(v){return decodeURIComponent(v.slice(prefix.length));})[0]||"";
+      }
+      function clearShareCookie(){
+        document.cookie="daRoomShare=; Max-Age=0; Domain=danandalice.co.uk; Path=/; Secure; SameSite=Lax";
+      }
+      var token=(getCookie("daRoomShare")||"").toUpperCase();
+      if(!/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{8}$/.test(token)) token="";
+      var src="https://script.google.com/macros/s/AKfycbyP5aMvPN0CKMdxesFovK7GuLSwy-pRDTVFCXi9fmdbS8hmX29DVxYhi8PQamqDa8R8/exec?view=ACCOMMODATION";
+      if(token) src+="&share="+encodeURIComponent(token);
+      document.getElementById("portal").src=src;
+      window.addEventListener("message",function(event){
+        if(event&&event.data&&event.data.type==="DA_ROOM_SHARE_CONSUMED") clearShareCookie();
+      });
+    })();
+  </script>
+</body>
+</html>
